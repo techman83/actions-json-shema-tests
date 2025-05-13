@@ -1,0 +1,16 @@
+name: Validate Workflows
+
+on:
+  push:
+
+jobs:
+  validate-github-actions-workflows:
+    name: Validate GitHub Actions workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate workflows
+        uses: techman83/json-schema-validate-action@fix/actions-cache
+        with:
+          schema: https://json.schemastore.org/github-workflow.json
+          files: .github/workflows/*.yaml
